@@ -1,0 +1,107 @@
+<div class="container mt-5">
+    <form [formGroup]="contactForm" (ngSubmit)="onSubmit(contactForm.value); contactForm.reset(); ">
+      <div class="mb-3">
+        <label for="firstname" class="form-label">First name</label>
+        <input
+          type="name"
+          class="form-control"
+          id="firstname"
+          aria-describedby="emailHelp"
+          name="firstName"
+          placeholder="Enter your first name"
+          formControlName="firstName"
+          (change)="log()"
+        />
+        <div class="errors d-flex justify-content-center"
+        *ngIf="userValues['firstName']?.touched && userValues['firstName']?.invalid" >
+            <div *ngIf="userValues['firstName'].errors?.['required']" > *first name is required* </div>
+            <div *ngIf="userValues['firstName'].errors?.['minlength']" > *first name min length is {{userValues['firstName'].errors?.['minlength'].requiredLength}}* </div>
+
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Last Name</label>
+        <input
+          type="name"
+          class="form-control"
+          id="lastname"
+          aria-describedby="emailHelp"
+          name="lastname"
+         formControlName="lastname"
+          placeholder="Enter your last name"
+          (change)="log()"
+        />
+        <div class="errors d-flex justify-content-center"
+        *ngIf="userValues['lastname']?.touched && userValues['lastname']?.invalid" >
+            <div *ngIf="userValues['lastname'].errors?.['required']" > *last name is required* </div>
+            <div *ngIf="userValues['lastname'].errors?.['minlength']" > *last name min length is {{userValues['lastname'].errors?.['minlength'].requiredLength}}* </div>
+
+        </div>
+      </div> 
+      <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          aria-describedby="emailHelp"
+          name="email"
+         formControlName="email"
+          placeholder="Enter your email"
+          (change)="log()"
+  
+        />
+        <div class="errors d-flex justify-content-center"
+        *ngIf="userValues['email']?.touched && userValues['email']?.invalid" >
+            <div *ngIf="userValues['email'].errors?.['required']" > *email is required* </div>
+            <div *ngIf="userValues['email'].errors?.['email']" > *email invalid* </div>
+            <div *ngIf="userValues['email'].errors?.['pattern'] && !userValues['email'].errors?.['email']" > *just gmail or google mail is valid</div>
+
+
+        </div>
+      </div>
+  
+      <div class="mb-3 form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="male"
+          value="male"
+        formControlName="gender"
+        />
+        <label class="form-check-label" for="male"> Male </label>
+      </div>
+      <div class="mb-3 form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="gender"
+          id="female"
+          value="female"
+          formControlName="gender"
+
+        />
+        <label class="form-check-label" for="female"> Female </label>
+      </div>
+      <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" name="isMarried" id="isMarried" formControlName="isMarried">
+          <label class="form-check-label" for="isMarried">Is married</label>
+        </div>
+      <div class="mb-3">
+        <select class="form-control" aria-label="Default select example" name="country" formControlName="country">
+        <option selected value="Egypt">choose your country</option>
+            <option *ngFor="let cntry of countries" >
+            {{cntry.name}}
+          </option>
+        </select> 
+        <div class="errors d-flex justify-content-center"
+        *ngIf="userValues['country']?.touched && userValues['country']?.invalid" >
+            <div *ngIf="userValues['country'].errors?.['required']" > *email is required* </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="contactForm.invalid" >Submit</button>
+    </form>
+  </div>
+  

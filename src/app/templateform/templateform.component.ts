@@ -8,7 +8,12 @@ import { Countries } from './countries';
 })
 export class TemplateformComponent implements OnInit {
 countries:Countries[]=[{name:"Egypt"},{name:"India"},{name:"Sudan"},{name:"China"}]
-
+log(name:any){
+console.log(name)
+}
+onSubmit(value:any){
+console.log(value)
+}
   constructor() { }
 
   ngOnInit(): void {
